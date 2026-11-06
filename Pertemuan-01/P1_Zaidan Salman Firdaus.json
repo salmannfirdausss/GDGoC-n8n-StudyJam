@@ -1,0 +1,101 @@
+{
+  "name": "My workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "P1",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "0a0b7ad6-a73d-442a-bf8b-1054b27aa9b8",
+      "name": "Webhook",
+      "webhookId": "66e7d3f3-f217-439e-9758-7f1c36bbbbc2"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "dbb1b19f-6b10-4761-b32b-cfb2ec42ffa9",
+              "name": "status",
+              "value": "success",
+              "type": "string"
+            },
+            {
+              "id": "f01dc633-1533-47e8-bf4a-9ae12761a292",
+              "name": "message",
+              "value": "=Terima Kasih {{ $json.body.Nama }} pesan kamu: \"{{ $json.body.Pesan }}\" telah berhasil diterima. ",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        224,
+        0
+      ],
+      "id": "fe398c6d-9025-4384-aab5-036a6bcec34c",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        448,
+        0
+      ],
+      "id": "10b338be-3760-4f84-8e2f-3cf22e069770",
+      "name": "Respond to Webhook"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "b7decb36-7260-4db1-92c3-a9a7dcaeaba1",
+  "meta": {
+    "instanceId": "afdf81996a15865c9a0713ffd66ce52a635e6fc7510328e971d8cc7db6a4a3c5"
+  },
+  "nodeGroups": [],
+  "id": "HYMeEE7wRF33lcA8",
+  "tags": []
+}
